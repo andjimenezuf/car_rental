@@ -9,16 +9,34 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/carousel": "^7.6.2",
+    "@mantine/core": "^7.6.2",
+    "@mantine/dates": "^7.6.2",
+    "@mantine/form": "^7.6.2",
+    "@mantine/hooks": "^7.6.2",
+    "@mantine/next": "^6.0.21",
+    "@supabase/auth-helpers-nextjs": "^0.9.0",
+    "@supabase/supabase-js": "^2.39.8",
+    "@tabler/icons-react": "^3.1.0",
+    "next": "14.1.4",
+    "next-cloudinary": "^6.3.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.1.4"
+    "react-icons": "^5.0.1",
+    "react-leaflet": "^4.2.1",
+    "react-toastify": "^10.0.5",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tanstack/eslint-plugin-query": "^5.28.6",
+    "@types/leaflet": "^1.9.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.8",
     "eslint": "^8",
-    "eslint-config-next": "14.1.4"
+    "eslint-config-next": "14.1.4",
+    "postcss-preset-mantine": "^1.13.0",
+    "typescript": "^5"
   }
 }
