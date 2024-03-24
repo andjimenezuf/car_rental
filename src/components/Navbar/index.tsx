@@ -4,14 +4,25 @@ import classes from './Style.module.css'
 import { Logo } from './Logo'
 import { AuthButtons } from './AuthButtons'
 import { ThemeSwitcher } from './ThemeSwitcher'
+import { NavigationMobile } from './NavigationMobile'
 
 export const Navbar = () => {
   return (
     <Box className={classes.header}>
         <Group justify="space-between" h='100%'>
             <Logo />
-            <AuthButtons />
-            <ThemeSwitcher/>
+            <Box visibleFrom='sm'>
+              <AuthButtons />
+            </Box>
+            <Box visibleFrom='sm'>
+               <ThemeSwitcher/>
+            </Box>
+
+            <Box hiddenFrom='sm'>
+              <NavigationMobile />
+            </Box>
+            
+           
         </Group>
 
     </Box>
