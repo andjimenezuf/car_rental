@@ -3,12 +3,12 @@ import React from 'react'
 
 export const VerifiedPage = () => {
   return (
-    <div>
+    
       <><Verified/>
       </>
 
 
-    </div>
+    
   )
 }
 

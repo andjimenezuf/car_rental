@@ -1,4 +1,4 @@
-
+'use client'
 import Link from 'next/link';
 import {GoogleButton} from './GoogleButton';
 import { Logo } from '@/components/Navbar/Logo';
@@ -10,8 +10,8 @@ import { signupWithEmailPassword } from '@/services/auth.service';
 
 export function Signup() {
     const signupForm = useSignupForm();
-    const handleSignup = async() =>{
 
+    const handleSignup = async() =>{
         const {email, password} = signupForm.values;
         const {error} = await signupWithEmailPassword(email, password);
 
@@ -19,16 +19,14 @@ export function Signup() {
             console.log(error);
         }else{
             console.log('Signup Successful');
-
         }
 
-
-    }
+    };
     return (
         <>
             <Box px="md" py="xl">
                 <Paper className={`${classes.formPaper} withBorder`}>
-                    <Text size="lg" fw={500}>
+                  <Text size="lg" fw={500}>
                         Welcome to <Logo />
                     </Text>
                     <GoogleButton />

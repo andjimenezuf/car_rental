@@ -1,12 +1,14 @@
-import { useForm, UseFormReturnType } from "@mantine/form";
+"use client"
 import { ISignupFormDetails } from "@/models"
+import { useForm, UseFormReturnType } from "@mantine/form";
+
 
 export const useSignupForm = (): UseFormReturnType<ISignupFormDetails> => {
   const form = useForm({
     initialValues: {
-      email: '',
-      password: '',
-      confirmPassword: '',
+      email: "",
+      password: "",
+      confirmPassword: "",
       terms: true,
     },
 
