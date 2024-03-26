@@ -29,10 +29,9 @@ export default function RootLayout({
 
           <UserSessionContextProvider>
           <Navbar />
-          {children}
+          {children} 
           </UserSessionContextProvider>
-          
-        
+
         </MantineProvider> 
       </body>
 

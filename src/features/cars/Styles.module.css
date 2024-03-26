@@ -1,0 +1,24 @@
+.parentContainer {
+    background-color: light-dark(
+    var(--mantine-color-gray-1),
+    var(--mantine-color-body)
+    );
+  }
+  
+  .mapToggle {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .mapToggle:hover {
+    background-color: transparent;
+  }
+  
+  .container {
+    background-color: light-dark(
+    var(--mantine-color-gray-1),
+    var(--mantine-color-body)
+    );
+    gap: var(--mantine-spacing-md);
+  }
+  

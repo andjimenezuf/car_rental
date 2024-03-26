@@ -17,20 +17,20 @@ export const AuthButtons = () => {
   const {session} = useUserSessionContext()
    
   return (
-    <>{!excludedPaths.includes(pathname)&&(
-      <Group grow={smallScreen}>
-        {session ? ( <ProfileMenu/> ): (<>
-        <Button component={Link} href="/login" 
-          variant='default'>Log In</Button>
+    <>
+      {!excludedPaths.includes(pathname)&&(
+        <Group grow={smallScreen}>
+          {session ? ( <ProfileMenu/> ): (<>
+          <Button component={Link} href="/login" 
+            variant='default'>Log In</Button>
 
-          <Button component={Link} href="/signup"
-          variant='gradient' gradient={primaryGradient}>Sign Up</Button>
-        </>
-          
-        )}
-
-      </Group> 
-    )}
+            <Button component={Link} href="/signup"
+            variant='gradient' gradient={primaryGradient}>Sign Up</Button>
+          </>
+            
+          )}
+        </Group> 
+      )}
     
       
     </>

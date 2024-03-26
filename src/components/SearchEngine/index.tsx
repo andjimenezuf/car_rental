@@ -8,7 +8,7 @@ import { SelectDate } from '@/components/SelectDate'
 
 export const SearchEngine = () => {
   return (
-    <Container className={classes.container}>
+    <Container className={classes.container} size="100%">
     <Flex direction={{base: 'column', sm:"row"}} justify="center" gap={{base: 'sm', sm: 'lg'}}
         align={{base: 'stretch', sm: 'flex-end'}}>
         <SelectRegion/>

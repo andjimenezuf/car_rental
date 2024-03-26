@@ -23,16 +23,17 @@ export function Login(props: PaperProps) {
 
   const handleLogin =async () => {
     const {email, password} = form.values;
-    setIsSubmitting(true);
 
+    setIsSubmitting(true);
     const {error, data} = await logInWithEmailPassword(email, password);
     setIsSubmitting(false);
      
     if(error && error.message === errorMessage){
       console.log(error);
+      alert(error);
       setNotRegistered(true);
     }else{
-      if(data.user == null || data.session ==null){
+      if(data.user == null || data.session ==  null){
         setNotVerified(true);
       }
       console.log('login successful');

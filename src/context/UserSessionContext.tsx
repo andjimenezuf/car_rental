@@ -13,7 +13,7 @@ export const UserSessionContext = createContext<IUserSessionContext>(null as any
 
 interface Props {
   children: ReactNode;
-}
+}  
 
 export const UserSessionContextProvider = ({ children }: Props) => {
     const [session, setSession] = useState<Session | null>(null);
@@ -35,9 +35,10 @@ export const UserSessionContextProvider = ({ children }: Props) => {
 
     }, [supabase.auth])
 
-
-
-  return <UserSessionContext.Provider value={{user, session}}>{children}</UserSessionContext.Provider>;
+    return (
+    <UserSessionContext.Provider value={{user, session}}>
+      {children}</UserSessionContext.Provider>
+      );
 };
 
 export const useUserSessionContext = () =>{
