@@ -1,6 +1,20 @@
-'use client'
-import{ Anchor, Box, Button, Divider, Group, Paper, PaperProps, PasswordInput, Stack, TextInput, Text, LoadingOverlay }
-from '@mantine/core';
+
+'use client';
+
+import {
+  Anchor,
+  Box,
+  Button,
+  Divider,
+  Group,
+  LoadingOverlay,
+  Paper,
+  PaperProps,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+} from '@mantine/core';
 import Link from 'next/link';
 import { GoogleButton } from './GoogleButton';
 import classes from './Style.module.css';
@@ -9,46 +23,50 @@ import { logInWithEmailPassword } from '@/services/auth.service';
 import { useState } from 'react';
 import { NotRegisteredAlert } from './NotRegisteredAlert';
 import { NotVerifiedAlert } from './NotVerifiedAlert';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
-
-const errorMessage = 'Invalid login credenties';
+const errorMessage = 'Invalid login credentials';
 
 export function Login(props: PaperProps) {
+  const [notRegistered, setNotRegistered] = useState(false);
+  const [notVerified, setNotVerified] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useLoginForm();
-  const[notRegistered, setNotRegistered] = useState(false);
-  const[notVerified, setNotVerified] = useState(false);
+  const { push } = useRouter();
 
-  const[isSubmitting, setIsSubmitting] = useState(false); // for loading 
-
-
-  const handleLogin =async () => {
-    const {email, password} = form.values;
+  const handleLogin = async () => {
+    const { email, password } = form.values;
 
     setIsSubmitting(true);
-    const {error, data} = await logInWithEmailPassword(email, password);
+    const { error, data } = await logInWithEmailPassword(email, password);
     setIsSubmitting(false);
-     
-    if(error && error.message === errorMessage){
+
+    if (error && error.message === errorMessage) {
       console.log(error);
-      alert(error);
       setNotRegistered(true);
-    }else{
-      if(data.user == null || data.session ==  null){
+    } else {
+      if (data.user == null || data.session == null) {
         setNotVerified(true);
       }
-      console.log('login successful');
-      
+      form.reset();
+      setNotRegistered(false);
+      setNotVerified(false);
+
+      push('/');
+      toast.success('Login Successful', {
+        position: "top-right"
+      });
     }
-  }
+  };
 
   return (
     <Box px="md" py="xl">
       <Paper className={classes.formPaper} withBorder {...props}>
         <LoadingOverlay
           visible={isSubmitting}
-          overlayProps={{radius:"xl", blur:1}}
-          />
-
+          overlayProps={{ radius: 'sm', blur: 2 }}
+        />
         <Text size="lg" fw={500}>
           Welcome back,
         </Text>
@@ -59,60 +77,63 @@ export function Login(props: PaperProps) {
           my="lg"
         />
 
-            <form onSubmit={form.onSubmit(()=> handleLogin())}>
-                <Stack>
-                    <TextInput
-                    required
-                    label="Email"
-                    placeholder="hello@cargo.com"
-                    radius="md"
-                    value={form.values.email}
-                    onChange={(event)=> form.setFieldValue('email', event.currentTarget.value)}
-                    error={form.errors.email && form.errors.email}
-                    />
-                    <PasswordInput
-                    required
-                    label="Password"
-                    placeholder="Your password"
-                    radius="md"
-                    value={form.values.password}
-                    onChange={(event)=> form.setFieldValue('password', event.currentTarget.value)}
-                    error={form.errors.password && form.errors.password}
-                    />
-                </Stack>
+        <form onSubmit={form.onSubmit(() => handleLogin())}>
+          <Stack>
+            <TextInput
+              required
+              label="Email"
+              placeholder="hello@cargo.com"
+              radius="md"
+              value={form.values.email}
+              onChange={(event) =>
+                form.setFieldValue('email', event.currentTarget.value)
+              }
+              error={form.errors.email && form.errors.email}
+            />
 
-                {notRegistered && <NotRegisteredAlert/>}
-                {notVerified && <NotVerifiedAlert/>}
+            <PasswordInput
+              required
+              label="Password"
+              placeholder="Your password"
+              radius="md"
+              value={form.values.password}
+              onChange={(event) =>
+                form.setFieldValue('password', event.currentTarget.value)
+              }
+              error={form.errors.password && form.errors.password}
+            />
+          </Stack>
 
-                <Group justify="space-between" mt="xl">
-                    <Anchor
-                        component={Link}
-                        href="/signup"
-                        type="button"
-                        c="dimmed"
-                        size="xs"
-                    >
-                        Don{`t`} have an account? Register
-                    </Anchor>
-                        <Button type="submit" radius="xl">
-                            Login
-                        </Button>
-                </Group>
+          {notRegistered && <NotRegisteredAlert />}
+          {notVerified && <NotVerifiedAlert />}
 
-                <Group mt="xl">
-                    <Anchor
-                        component={Link}
-                        href="/providers"
-                        type="button"
-                        c="dimmed"
-                        size="xs"
-                    >
-                        Want to rent your car? Create Provider Account.
-                    
-                    </Anchor>
-                    
-                </Group>
-            </form>
+          <Group justify="space-between" mt="xl">
+            <Anchor
+              component={Link}
+              href="/signup"
+              type="button"
+              c="dimmed"
+              size="xs"
+            >
+              Don{`'`}t have an account? Register
+            </Anchor>
+            <Button type="submit" radius="xl">
+              Login
+            </Button>
+          </Group>
+
+          <Group mt="xl">
+            <Anchor
+              component={Link}
+              href="/providers"
+              type="button"
+              c="dimmed"
+              size="xs"
+            >
+              Want to Rent your Car? Create Provider Account.
+            </Anchor>
+          </Group>
+        </form>
       </Paper>
     </Box>
   );

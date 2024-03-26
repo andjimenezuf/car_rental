@@ -1,7 +1,7 @@
 .parentContainer {
     background-color: light-dark(
-    var(--mantine-color-gray-1),
-    var(--mantine-color-body)
+      var(--mantine-color-gray-1),
+      var(--mantine-color-body)
     );
   }
   
@@ -16,9 +16,12 @@
   
   .container {
     background-color: light-dark(
-    var(--mantine-color-gray-1),
-    var(--mantine-color-body)
+      var(--mantine-color-gray-1),
+      var(--mantine-color-body)
     );
     gap: var(--mantine-spacing-md);
+    align-items: flex-start;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
   }
-  

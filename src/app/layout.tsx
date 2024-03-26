@@ -6,6 +6,8 @@ import '@mantine/carousel/styles.css'
 import '@mantine/dates/styles.css'
 import { Navbar } from "@/components/Navbar";
 import { UserSessionContextProvider } from "@/context/UserSessionContext";
+import { ToastContainer } from 'react-toastify';
+import { ReactQueryProvider } from "./queryProvider";
 
 
 
@@ -25,14 +27,22 @@ export default function RootLayout({
       <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
+        
         <MantineProvider>
-
+          <ReactQueryProvider>
+            
           <UserSessionContextProvider>
           <Navbar />
           {children} 
+          <ToastContainer />
           </UserSessionContextProvider>
 
+          </ReactQueryProvider>
+          
+
         </MantineProvider> 
+       
+        
       </body>
 
     </html>
