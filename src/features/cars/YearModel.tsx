@@ -8,7 +8,7 @@ export const YearModel = () => {
       <Text my={16}>Year</Text>
       <RangeSlider
         py="xl"
-        min={1990}
+        min={1878}
         max={currentYear}
         labelAlwaysOn
         thumbSize={12}

@@ -44,12 +44,7 @@ export const CarCard = () => {
               {5}
             </Text>
           </Flex>
-          <Flex my={8} align="center" title="transmission">
-            <IconManualGearbox size="16px" color="gray" />
-            <Text c="gray.6" size="sm" mx={4}>
-              {'Automatic'}
-            </Text>
-          </Flex>
+          
 
           
 

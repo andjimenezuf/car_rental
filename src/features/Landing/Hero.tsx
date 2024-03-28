@@ -2,6 +2,8 @@ import { Overlay, Container, Title, Button, Text } from '@mantine/core';
 import classes from './HeroContentLeft.module.css';
 import { primaryGradient } from '@/const';
 import { SearchEngine } from '@/components/SearchEngine';
+import HeroButton from './HeroButton'; // Assuming HeroButton is in the same directory
+
 
 export function Hero() {
   return (
@@ -18,9 +20,8 @@ export function Hero() {
                 Book the Car Now
         </Text>
 
-        <Button variant="gradient" gradient={primaryGradient} size="xl" radius="xl" className={classes.control}>
-        Explore Cars
-        </Button>
+        <HeroButton /> 
+        
       </Container>
 
 

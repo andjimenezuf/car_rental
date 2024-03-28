@@ -50,7 +50,7 @@ export const CarsLayout = () => {
           <Box display={{ base: 'none', md: 'block' }}>
             <BodyType />
             <PriceRange />
-            <YearModel />
+           
             <Space my="lg" />
           </Box>
         </Card>
