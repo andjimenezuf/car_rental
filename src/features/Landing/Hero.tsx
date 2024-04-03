@@ -20,15 +20,9 @@ export function Hero() {
                 Book the Car Now
         </Text>
 
-        <HeroButton /> 
+        {/* <HeroButton />  */}
         
       </Container>
-
-
-    <Container pb= "4rem">
-      <SearchEngine />
-
-    </Container>
 
     </div>
   );

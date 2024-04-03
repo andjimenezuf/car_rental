@@ -5,7 +5,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconFilterCog } from '@tabler/icons-react';
 import { PriceRange } from './PriceRange';
 import { ResetFiltersButton } from './ResetFiltersButton';
-import { YearModel } from './YearModel';
 
 export const FiltersDrawer = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -32,7 +31,6 @@ export const FiltersDrawer = () => {
 
         <SelectCarType />
         <PriceRange />
-        <YearModel />
       
         <Space my="lg" />
         

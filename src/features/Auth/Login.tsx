@@ -1,22 +1,8 @@
-
 'use client';
-
-import {
-  Anchor,
-  Box,
-  Button,
-  Divider,
-  Group,
-  LoadingOverlay,
-  Paper,
-  PaperProps,
-  PasswordInput,
-  Stack,
-  Text,
-  TextInput,
+import {Anchor,Box,Button,Divider,Group,LoadingOverlay,Paper,PaperProps,PasswordInput,Stack,Text,TextInput,
 } from '@mantine/core';
 import Link from 'next/link';
-import { GoogleButton } from './GoogleButton';
+
 import classes from './Style.module.css';
 import { useLoginForm } from '@/hooks/useLoginForm';
 import { logInWithEmailPassword } from '@/services/auth.service';
@@ -70,7 +56,6 @@ export function Login(props: PaperProps) {
         <Text size="lg" fw={500}>
           Welcome back,
         </Text>
-        <GoogleButton />
         <Divider
           label="Or continue with email"
           labelPosition="center"

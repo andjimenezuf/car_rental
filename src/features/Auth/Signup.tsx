@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import {GoogleButton} from './GoogleButton';
+
 import { Logo } from '@/components/Navbar/Logo';
 import classes from './Style.module.css';
 import { Anchor, Box, Button, Checkbox, Divider, Group, Paper, PasswordInput, Stack, TextInput, Text, LoadingOverlay } from '@mantine/core';
@@ -44,7 +44,6 @@ export function Signup() {
                   <Text size="lg" fw={500}>
                         Welcome to <Logo />
                     </Text>
-                    <GoogleButton />
                     <Divider label="Or Continue with" labelPosition="center" my="md" />
                     <form onSubmit={signupForm.onSubmit(()=> handleSignup())}>
                         <Stack>

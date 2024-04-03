@@ -6,7 +6,7 @@ export const SelectRegion = () => {
     <Select
       label="Region"
       placeholder="Gainesville"
-      data={["Miami", "Tampa", "Orlando"]}
+      data={["Gainesville","Miami", "Tampa", "Orlando"]}
       searchable
       nothingFoundMessage="Nothing Found"
     />

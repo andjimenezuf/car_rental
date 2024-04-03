@@ -9,7 +9,6 @@ import dynamic from 'next/dynamic';
 import { ResetFiltersButton } from './ResetFiltersButton';
 import { BodyType } from './BodyType';
 import { PriceRange } from './PriceRange';
-import { YearModel } from './YearModel';
 import { CarList } from './CarList';
 import { FiltersDrawer } from './FiltersDrawer';
 
@@ -19,7 +18,10 @@ const Map = dynamic(() => import('@/components/Map'), {
 
 export const CarsLayout = () => {
   return (
+      
+
     <Container className={classes.parentContainer} size="xl" my="sm" py="md">
+
       <SearchEngine />
 
       <Flex justify="flex-end">
@@ -31,12 +33,7 @@ export const CarsLayout = () => {
 
       <Map height="200px" />
 
-      <Flex
-        direction={{ base: 'column', md: 'row' }}
-        className={classes.container}
-      >
-        {/* Filters */}
-        <Card w={{ base: '100%', md: '350px' }}>
+      <Card w={{ base: '100%', md: '100%' }}>
           <Flex align="center" justify="space-between">
             <Title order={4}>Filters</Title>
             <Box display={{ base: 'none', md: 'inline-block' }}>
@@ -54,6 +51,12 @@ export const CarsLayout = () => {
             <Space my="lg" />
           </Box>
         </Card>
+
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        className={classes.container}
+      >
+ 
 
         <CarList />
       </Flex>
