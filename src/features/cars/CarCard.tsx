@@ -1,6 +1,7 @@
 import { primaryGradient, USCurrency } from '@/const';
 import { Box, Button, Card, Divider, Flex, Image, Text, Title, Badge } from '@mantine/core';
 import { IconWheel } from '@tabler/icons-react';
+import ReviewToken from './ReviewToken';
 
 export const CarCard = () => {
   return (
@@ -11,10 +12,13 @@ export const CarCard = () => {
           <Title order={5}>Toyota Camry 2023</Title>
           <Text color="gray.6">Sedan</Text>
         </Box>
+        <Box>
+          <ReviewToken/>
+        </Box>
       </Flex>
       <Flex justify="space-between" align="center">
         <Image
-          style={{ maxWidth: '200px', maxHeight: '150px' }} // Adjust size directly
+          style={{ maxWidth: '200px', maxHeight: '150px', textAlign: 'center', marginLeft: "35px", marginTop: "20px" }} // Adjust size directly
           radius="md"
           my={8}
           src='https://res.cloudinary.com/dicme7cio/image/upload/v1697124203/car-go-rentals/cars/znn2meedol66ikfm5fue.webp'
@@ -48,7 +52,7 @@ export const CarCard = () => {
             {USCurrency}
             {300}
           </Text>
-          <Text size="xs">/day</Text>
+          <Text size="lg">/day</Text>
         </Flex>
       </Flex>
     </Card>
