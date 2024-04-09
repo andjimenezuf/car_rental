@@ -1,6 +1,11 @@
 import { primaryGradient, USCurrency } from '@/const';
 import { Box, Button, Card, Divider, Flex, Image, Text, Title, Badge } from '@mantine/core';
 import { IconWheel } from '@tabler/icons-react';
+import {Car} from '../../services/interfaces'
+
+interface CarCardProps {
+  car: Car;
+}
 
 export const CarCard = () => {
   return (

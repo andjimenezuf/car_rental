@@ -5,13 +5,18 @@ import Link from 'next/link';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { IoCarSportSharp, IoChevronDown } from 'react-icons/io5';
+import { useRouter } from 'next/navigation';
+
+
 
   
 export function ProfileMenu() {
   const {user} = useUserSessionContext();
+  const { push } = useRouter();
 
   const handleSignOut = async() =>{
     await logOut();
+    push('/');
 
   }
 
@@ -35,12 +40,13 @@ export function ProfileMenu() {
          <Text lineClamp={1}>{user?.email}</Text>
        </Menu.Label>
        <Menu.Item
-         component={Link}
-         href="/my-account/profile"
-         leftSection={<CgProfile size="0.8rem" />}
+       component ={Link}
+          href="/userPages"
+          leftSection={<CgProfile size="0.8rem" />}
        >
          Profile
-       </Menu.Item>
+        </Menu.Item>
+
 
        <Menu.Item
          component={Link}
