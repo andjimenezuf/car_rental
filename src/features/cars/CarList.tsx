@@ -9,10 +9,7 @@ export const CarList = () => {
         <CarCard />
         <CarCard />
         <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
+       
       </Flex>
     </Box>
   );

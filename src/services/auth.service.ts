@@ -23,3 +23,7 @@ export const logOut = async () =>{
     const res = await supabase.auth.signOut();
     return res;
 }
+
+// Inside auth.service.ts
+export const supabaseClient = createClientComponentClient();
+

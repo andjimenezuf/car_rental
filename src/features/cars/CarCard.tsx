@@ -1,7 +1,11 @@
 import { primaryGradient, USCurrency } from '@/const';
 import { Box, Button, Card, Divider, Flex, Image, Text, Title, Badge } from '@mantine/core';
 import { IconWheel } from '@tabler/icons-react';
-import ReviewToken from './ReviewToken';
+import {Car} from '../../services/interfaces'
+
+interface CarCardProps {
+  car: Car;
+}
 
 export const CarCard = () => {
   return (
@@ -11,9 +15,6 @@ export const CarCard = () => {
         <Box>
           <Title order={5}>Toyota Camry 2023</Title>
           <Text color="gray.6">Sedan</Text>
-        </Box>
-        <Box>
-          <ReviewToken/>
         </Box>
       </Flex>
       <Flex justify="space-between" align="center">
