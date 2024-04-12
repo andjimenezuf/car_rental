@@ -46,7 +46,7 @@ export function NavbarSimple() {
         {links}
       </div>
 
-
     </nav>
+   
   );
 }
