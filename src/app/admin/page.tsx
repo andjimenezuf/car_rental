@@ -1,8 +1,9 @@
+'use client'
 import { NavbarSimple } from '@/features/Auth/admin';
 import ManageEmployee from '@/features/admin/ManageEmployee';
 import CarInventory from '@/features/employee/CarInventory';
 import Reservations from '@/features/employee/Reservations';
-import React from 'react'
+import React, { useState } from 'react'
 
 const adminPage = () => {   
   const container = {
@@ -18,20 +19,18 @@ const adminPage = () => {
     marginBottom: 25,
     width: 1180
   }
+
+  const [currentPage, setCurrentPage] = useState('None');
   
   return (
     <div style={container}>
       <div style={navbar}>
-        <NavbarSimple/>
+        <NavbarSimple onStateChange={setCurrentPage}/>
       </div>
       <div style={inventory}>
-        <ManageEmployee/>
-        <br />
-        <br />
-        <Reservations/>
-        <br />
-        <br />
-        <CarInventory/>
+        {currentPage == "Manage Staff" && <ManageEmployee/>}
+        {currentPage == "Reservations" && <Reservations/>}
+        {currentPage == "Inventory" && <CarInventory/>}
       </div>   
     </div>
   )

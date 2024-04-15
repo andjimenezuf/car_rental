@@ -1,8 +1,10 @@
+'use client'
 import { NavbarSimple } from '@/features/Auth/employee';
 import CarInventory from '@/features/employee/CarInventory';
 import Reservations from '@/features/employee/Reservations';
 import { BackgroundImage, Group } from '@mantine/core';
-import React from 'react'
+import { useSetState } from '@mantine/hooks';
+import React, { useState } from 'react'
 
 const employeePage = () => { 
   const container = {
@@ -18,17 +20,17 @@ const employeePage = () => {
     marginBottom: 25,
     width: 1180
   }
-  
+
+  const [currentPage, setCurrentPage] = useState('None');
+
   return (
     <div style={container}>
       <div style={navbar}>
-        <NavbarSimple/>
+        <NavbarSimple onStateChange={setCurrentPage}/>
       </div>
       <div style={inventory}>
-        <Reservations/>
-        <br />
-        <br />
-        <CarInventory/>
+        {currentPage == 'Reservations' && <Reservations/>}
+        {currentPage == 'Inventory' && <CarInventory/>}
       </div>   
     </div>
   )

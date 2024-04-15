@@ -11,7 +11,8 @@ const CarInventory = () => {
   const container = {
     borderRadius: "rem(6px)",
     border: "1px solid rgba(255, 255, 255, 0.125)",
-    padding: "1rem",
+    paddingTop: 20,
+    paddingBottom: 20,
     marginTop: 20,
     marginBottom: 40
   }

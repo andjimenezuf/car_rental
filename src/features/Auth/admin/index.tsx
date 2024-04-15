@@ -1,24 +1,29 @@
 // DoubleNavbar.tsx
 'use client'
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Group, Code } from '@mantine/core';
 import {
   IconCar,
   IconUsers,
-  IconMessage,
+  IconListDetails,
 } from '@tabler/icons-react';
 
 import classes from './DoubleNavbar.module.css';
 
 const data = [
-  { link: '', label: 'Cars', icon: IconCar },
-  { link: '', label: 'Employees', icon: IconUsers },
-  { link: '', label: 'Reviews', icon: IconMessage },
-
+  { link: '', label: 'Manage Staff', icon: IconUsers },
+  { link: '', label: 'Reservations', icon: IconCar },
+  { link: '', label: 'Inventory', icon: IconListDetails },
 ];
 
-export function NavbarSimple() {
+export function NavbarSimple({onStateChange}:{
+  onStateChange: Dispatch<SetStateAction<string>>
+}) {
   const [active, setActive] = useState('Billing');
+
+  useEffect(() => {
+    onStateChange(active)
+  })
 
   const links = data.map((item) => (
     <a

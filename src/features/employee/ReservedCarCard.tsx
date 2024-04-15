@@ -29,7 +29,7 @@ export const ReservedCarCard = () => {
         
       </Flex>
 
-      <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
           <Box style={{ textAlign: 'center' }} my="md">
           <Badge color="green" mt='sm' size="xs" p="sm">Status</Badge>
           </Box>

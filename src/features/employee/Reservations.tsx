@@ -9,8 +9,8 @@ const Reservations = () => {
   const container = {
     borderRadius: "rem(6px)",
     border: "1px solid rgba(255, 255, 255, 0.125)",
-    padding: "1rem",
-    marginTop: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
     marginBottom: 40
   }
 
