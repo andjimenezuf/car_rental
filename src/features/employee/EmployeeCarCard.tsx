@@ -20,7 +20,7 @@ export const EmployeeCarCard = () => {
       </Flex>
       <Flex justify="space-between" align="center">
         <Image
-          style={{ maxWidth: '250px', maxHeight: '150px', marginLeft: '20px' }} // Adjust size directly
+          style={{ margin: "auto", width: "90%" }} // Adjust size directly
           radius="md"
           my={8}
           src='https://res.cloudinary.com/dicme7cio/image/upload/v1697124203/car-go-rentals/cars/znn2meedol66ikfm5fue.webp'

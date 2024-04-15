@@ -17,7 +17,8 @@ const adminPage = () => {
   const inventory = {
     marginRight: 25, 
     marginBottom: 25,
-    width: 1180
+    marginLeft: 25,
+    width: "100%",
   }
 
   const [currentPage, setCurrentPage] = useState('None');
