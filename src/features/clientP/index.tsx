@@ -1,18 +1,35 @@
-'use client'
-import { useState } from 'react';
-import { Card, Text, Progress } from '@mantine/core';
+import { Avatar, Text, Group } from '@mantine/core';
+import { IconPhoneCall, IconAt } from '@tabler/icons-react';
+import classes from './UserInfo.module.css';
 
-
-export const DoubleNavbar = () => {
+export function UserInfoIcons() {
   return (
-    <Card withBorder radius="md" padding="xl" bg="var(--mantine-color-body)">
-    <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
-      Monthly goal
-    </Text>
-    <Text fz="lg" fw={500}>
-      $5.431 / $10.000
-    </Text>
-    <Progress value={54.31} mt="md" size="lg" radius="xl" />
-  </Card>
+    <div>
+      <Group wrap="nowrap">
+        <Avatar
+          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png"
+          size={94}
+          radius="md"
+        />
+        <div>
+          <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
+            Software engineer
+          </Text>
+
+          <Text fz="lg" fw={500} className={classes.name}>
+            Robert Glassbreaker
+          </Text>
+
+          <Group wrap="nowrap" gap={10} mt={3}>
+            <IconAt stroke={1.5} size="1rem" className={classes.icon} />
+            <Text fz="xs" c="dimmed">
+              robert@glassbreaker.io
+            </Text>
+          </Group>
+
+        
+        </div>
+      </Group>
+    </div>
   );
 }

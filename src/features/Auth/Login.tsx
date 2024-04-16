@@ -76,11 +76,7 @@ export function Login(props: PaperProps) {
         <Text size="lg" fw={500}>
           Welcome back,
         </Text>
-        <Divider
-          label="Or continue with email"
-          labelPosition="center"
-          my="lg"
-        />
+        
 
         <form onSubmit={form.onSubmit(() => handleLogin())}>
           <Stack>
@@ -127,17 +123,6 @@ export function Login(props: PaperProps) {
             </Button>
           </Group>
 
-          <Group mt="xl">
-            <Anchor
-              component={Link}
-              href="/providers"
-              type="button"
-              c="dimmed"
-              size="xs"
-            >
-              Want to Rent your Car? Create Provider Account.
-            </Anchor>
-          </Group>
         </form>
       </Paper>
     </Box>
