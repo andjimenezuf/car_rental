@@ -11,7 +11,7 @@ interface CarCardProps {
 export const EmployeeCarCard = () => {
   return (
     // Adjust the Card's style directly for better control over width
-    <Card style={{ width: '100%', maxWidth: 'calc(25% - 16px)', flex: '1 0 auto' }}>
+    <Card style={{ width: '100%', maxWidth: 'calc(25% - 16px)', border: "1px solid rgba(150, 150, 150)", flex: '1 0 auto' }}>
       <Flex align="flex-end" justify="space-between">
         <Box>
           <Title order={5}>Toyota Camry 2023</Title>

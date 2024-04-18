@@ -5,7 +5,7 @@ import EditButton from '../employee/EditButton'
 const EmployeeListing = () => {
   const container = {
     display: "flex",
-    border: "1px solid rgba(255, 255, 255, 0.125)",
+    border: "1px solid rgba(150, 150, 150)",
     marginTop: 20
   }
 

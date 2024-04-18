@@ -10,7 +10,7 @@ import { SelectDate } from '@/components/SelectDate'
 const CarInventory = () => {
   const container = {
     borderRadius: "rem(6px)",
-    border: "1px solid rgba(255, 255, 255, 0.125)",
+    border: "1px solid rgba(150, 150, 150)",
     paddingTop: 20,
     paddingBottom: 20,
     marginTop: 20,
