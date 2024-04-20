@@ -11,6 +11,8 @@ import { NotRegisteredAlert } from './NotRegisteredAlert';
 import { NotVerifiedAlert } from './NotVerifiedAlert';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { supabaseClient } from '@/services/auth.service';
+
 
 const errorMessage = 'Invalid login credentials';
 
@@ -23,26 +25,44 @@ export function Login(props: PaperProps) {
 
   const handleLogin = async () => {
     const { email, password } = form.values;
-
+  
     setIsSubmitting(true);
     const { error, data } = await logInWithEmailPassword(email, password);
     setIsSubmitting(false);
-
+  
     if (error && error.message === errorMessage) {
       console.log(error);
       setNotRegistered(true);
-    } else {
-      if (data.user == null || data.session == null) {
-        setNotVerified(true);
+    } else if (data.user && data.session) { // Check if user and session exist
+      const { data: userData, error: userError } = await supabaseClient
+        .from('users')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
+  
+      if (userError) {
+        console.log(userError);
+        toast.error('Failed to fetch user role.');
+      } else {
+        form.reset();
+        setNotRegistered(false);
+        setNotVerified(false);
+        
+        // Redirect based on user role
+        if (userData.role === 'admin') {
+          push('/admin');
+        } else if (userData.role === 'employee') {
+          push('/employee');
+        } else {
+          push('/'); // Redirect to a general dashboard or homepage
+        }
+  
+        toast.success('Login Successful', {
+          position: "top-right"
+        });
       }
-      form.reset();
-      setNotRegistered(false);
-      setNotVerified(false);
-
-      push('/');
-      toast.success('Login Successful', {
-        position: "top-right"
-      });
+    } else {
+      setNotVerified(true); // Handle not verified or null user/session
     }
   };
 
@@ -56,11 +76,7 @@ export function Login(props: PaperProps) {
         <Text size="lg" fw={500}>
           Welcome back,
         </Text>
-        <Divider
-          label="Or continue with email"
-          labelPosition="center"
-          my="lg"
-        />
+        
 
         <form onSubmit={form.onSubmit(() => handleLogin())}>
           <Stack>
@@ -107,17 +123,6 @@ export function Login(props: PaperProps) {
             </Button>
           </Group>
 
-          <Group mt="xl">
-            <Anchor
-              component={Link}
-              href="/providers"
-              type="button"
-              c="dimmed"
-              size="xs"
-            >
-              Want to Rent your Car? Create Provider Account.
-            </Anchor>
-          </Group>
         </form>
       </Paper>
     </Box>
