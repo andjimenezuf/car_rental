@@ -1,5 +1,5 @@
 // Import necessary components and libraries
-import { Box, Button, Card, Container, Divider, Flex, Space, Title } from '@mantine/core';
+import { Box, Button, Card, Container, Divider, Flex, Modal, Space, Title } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import classes from './Styles.module.css';
 import { SearchEngine } from '@/components/SearchEngine';
@@ -58,7 +58,7 @@ export const CarsLayout = () => {
   const [pickupDate, setPickupDate] = useState<Date | null>(null);
   const [returnDate, setReturnDate] = useState<Date | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedMake, setSelectedMake] = useState<string | null>(null);
+  const [mapShown, setMapShown] = useState(false);
 
   // Fetch cars from the database where their status is not 'With Customer'
   useEffect(() => {
@@ -155,9 +155,16 @@ export const CarsLayout = () => {
     <Container className="parentContainer" size="xl" my="sm" py="md">
       <SearchEngine />
       <Flex justify="flex-end">
-        <Button size="sm" variant="subtle">Show Map</Button>
+        <Button size="sm" variant="subtle" onClick={() => setMapShown(true)}>Show Map</Button>
       </Flex>
       <Map height="200px" />
+      <Modal
+      size={"100%"}
+      opened={mapShown}
+      onClose={() => setMapShown(false)}
+      >
+        <Map height="500px"/>
+      </Modal>
       <Card>
         <Flex align="center" justify="space-between">
           <Title order={4}>Filters</Title>

@@ -22,7 +22,16 @@ const Map = ({ height }: Props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={[29.6491, -82.34304]}>
-          <Popup>Region Name</Popup>
+          <Popup>Gainesville</Popup>
+        </Marker>
+        <Marker position={[25.7617, -80.1918]}>
+          <Popup>Miami</Popup>
+        </Marker>
+        <Marker position={[27.9517, -82.4588]}>
+          <Popup>Tampa</Popup>
+        </Marker>
+        <Marker position={[28.5384, -81.3789]}>
+          <Popup>Orlando</Popup>
         </Marker>
       </MapContainer>
     </Container>

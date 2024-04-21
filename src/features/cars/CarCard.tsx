@@ -44,6 +44,7 @@ const CarCard: React.FC<CarCardProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pickupDate, setPickupDate] = useState<Date | null>(null); 
   const [returnDate, setReturnDate] = useState<Date | null>(null);
+  const [hoverCard, setHoverCard] = useState(false);
 
   // Handles card click to toggle modal visibility
   const handleCardClick = () => {
@@ -61,7 +62,10 @@ const CarCard: React.FC<CarCardProps> = ({
 
   return (
     <>
-      <Card shadow="sm" p="lg" radius="md" withBorder onClick={handleCardClick}>
+      <Card style={{opacity: hoverCard ? 0.7 : 1}} shadow="sm" p="lg" radius="md" withBorder 
+      onClick={handleCardClick} 
+      onMouseEnter={() => setHoverCard(true)}
+      onMouseLeave={() => setHoverCard(false)}>
         <Flex direction="column">
           <Image
             src={car.Image}
