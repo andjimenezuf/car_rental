@@ -53,8 +53,8 @@ const CarList: React.FC<CarListProps> = ({
 }) => {
   // Render a grid of CarCard components
   return (
-    <Grid>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+    <Grid style={{marginTop: 20}}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', columnGap: '100px', rowGap: '20px' }}>
         {cars.map((car) => (
           <Grid.Col key={car.id} span={12}>
             <CarCard

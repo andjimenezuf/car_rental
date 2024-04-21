@@ -1,12 +1,13 @@
 // Import necessary libraries and components
 import React, { useState } from 'react';
 import { Box, Button, Card, Divider, Flex, Image, Text, Title, Badge, Modal, Group } from '@mantine/core';
-import { IconWheel } from '@tabler/icons-react';
+import { IconArrowRight, IconWheel } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
 import { DateValue } from '@mantine/dates';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Icon } from 'leaflet';
 
 // Define TypeScript interfaces for props and car details
 interface Car {
@@ -85,15 +86,15 @@ const CarCard: React.FC<CarCardProps> = ({
       <Modal
         opened={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        size="xxl"
+        size="65rem"
         centered
-        withCloseButton={false}
+        withCloseButton={true}
       >
         <Flex direction={{ base: 'column', md: 'row' }} gap="md">
           <Image
             src={car.Image}
             alt={car.Model}
-            style={{ maxWidth: '50%', height: 'auto' }}
+            style={{ maxWidth: 400, height: "100%"}}
           />
           <Flex direction="column" gap="md" style={{ flexGrow: 1 }}>
             <Text size="xl">
@@ -114,12 +115,15 @@ const CarCard: React.FC<CarCardProps> = ({
             <Text size="sm">
               <strong>Price:</strong> {car['Price Per Day']}/day
             </Text>
-            <div>
+            <div style={{display: 'flex', marginTop: 20}}>
               <DatePicker
+                placeholderText='Start Date'
                 selected={pickupDate}
                 onChange={(date: Date | null) => setPickupDate(date)}
               />
+              <IconArrowRight style={{marginLeft: 10, marginRight: 10, marginTop: 3}}/>
               <DatePicker
+                placeholderText='End Date'
                 selected={returnDate}
                 onChange={(date: Date | null) => setReturnDate(date)}
               />

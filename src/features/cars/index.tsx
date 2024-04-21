@@ -146,7 +146,7 @@ export const CarsLayout = () => {
       console.error('Error updating car status:', carUpdateError);
       alert('Couldnt update car status.');
     } else {
-      alert('Updated Car Status !'); // Confirm status update to the user
+      alert('Updated Car Status!'); // Confirm status update to the user
     }
   };
 

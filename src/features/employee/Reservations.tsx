@@ -1,11 +1,13 @@
-import { Box, Button, Container, Flex } from '@mantine/core'
-import React from 'react'
+import { Box, Button, Container, Flex, Modal, TextInput } from '@mantine/core'
+import React, { useState } from 'react'
 import ReservedCarCard from './ReservedCarCard'
 import { SelectRegion } from '@/components/SelectRegion'
 import { SelectDate } from '@/components/SelectDate'
 import { primaryGradient } from '@/const'
 
 const Reservations = () => {
+  const [newReservationOpen, setNewReservationOpen] = useState(false)
+
   const container = {
     borderRadius: "rem(6px)",
     border: "1px solid rgba(150, 150, 150)",
@@ -21,7 +23,7 @@ const Reservations = () => {
           <h1>Reservations</h1>
         </div>
         <div style={{marginTop: 30}}>
-          <Button variant='gradient' gradient={primaryGradient}>New Reservation</Button>
+          <Button variant='gradient' gradient={primaryGradient} onClick={() => setNewReservationOpen(true)}>New Reservation</Button>
         </div>
       </div>
       
@@ -42,7 +44,66 @@ const Reservations = () => {
           <ReservedCarCard/>
           <ReservedCarCard/>
         </Flex>
-      </Box> 
+      </Box>
+
+      <Modal
+        opened={newReservationOpen}
+        onClose={() => setNewReservationOpen(false)}
+        withCloseButton={false}
+      >
+        <h2>New Reservation</h2>
+
+        <TextInput
+          label="Car ID"
+          placeholder='000'
+          style={{marginBottom: 30}}
+          onChange={() => {
+            
+          }}
+        />
+
+        <Flex>
+          <TextInput
+            label="Pickup Date"
+            placeholder='2024-04-24'
+            style={{marginBottom: 30}}
+          />
+          <TextInput
+            label="Return Date"
+            placeholder='2024-04-26'
+            style={{marginLeft: 10, marginBottom: 30}}
+          />
+        </Flex>
+        
+        <TextInput
+          label="Total Price"
+          placeholder='300'
+          style={{marginBottom: 30}}
+        />
+
+        <TextInput
+          label="Status"
+          placeholder='Booked'
+          style={{marginBottom: 30}}
+        />
+
+        <TextInput
+          label="User ID"
+          placeholder='********'
+          style={{marginBottom: 30}}
+        />
+
+        <Button
+          style={{marginTop: 20}}
+          variant='gradient'
+          gradient={primaryGradient}
+          onClick={() => {
+            setNewReservationOpen(false)
+          }}
+        >
+          Add
+        </Button>
+      </Modal> 
     </div>
   )
 }

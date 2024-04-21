@@ -1,6 +1,6 @@
 import { primaryGradient } from '@/const'
 import { Button, Flex, Container, rem, px } from '@mantine/core'
-import React,{useState, useRef } from 'react'
+import React,{useState, useRef, Dispatch } from 'react'
 import classes from "./SearchEngine.module.css"
 import { SelectRegion } from '@/components/SelectRegion'
 import { SelectDate } from '@/components/SelectDate'
@@ -13,9 +13,12 @@ export const SearchEngine = () => {
           <SelectRegion/>
 
           <SelectDate label="Pickup Date"/>
-          <SelectDate  label="Return Date"/>
+          <SelectDate label="Return Date"/>
         
-          <Button variant='gradient' gradient={primaryGradient}>Search for car</Button>
+          <Button 
+          variant='gradient' 
+          gradient={primaryGradient}
+          >Search for car</Button>
         
       </Flex>
     </Container>
