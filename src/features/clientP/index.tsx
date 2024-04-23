@@ -5,8 +5,12 @@ import classes from './UserInfo.module.css';
 import { primaryGradient } from '@/const';
 import { useNavigate } from 'react-router-dom'
 import Link from 'next/link';
+import { useUserSessionContext } from '@/context/UserSessionContext'; // Ensure this is correctly imported
+
 
 export function UserInfoIcons() {
+  const { user } = useUserSessionContext(); // Assuming you have a context that provides user info
+
 
   return (
     <div style={{margin: "auto", paddingTop: 50, maxWidth: "fit-content"}}>
@@ -17,18 +21,13 @@ export function UserInfoIcons() {
           radius="md"
         />
         <div style={{marginLeft: 70}}>
-          <Title style={{marginTop: 10}} order={1} className={classes.name}>
-            Robert Glassbreaker
-          </Title>
 
-          <Text style={{marginTop: 10}}fz="xs" tt="uppercase" fw={700} c="dimmed">
-            Software engineer
-          </Text>
 
-          <Group wrap="nowrap" gap={10} mt={3}>
+           {/* Removed the name display since you mentioned not wanting to store names */}
+           <Group wrap="nowrap" gap={10} mt={3}>
             <IconAt stroke={1.5} size="1rem" className={classes.icon} />
-            <Text fz="xs" c="dimmed">
-              robert@glassbreaker.io
+            <Text fz="xl" >
+              {user?.email || "No email available"} {/* Display the email dynamically or a placeholder */}
             </Text>
           </Group>
           
