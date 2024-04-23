@@ -17,6 +17,7 @@ import { createClient } from '@supabase/supabase-js';
 import { v4 as uuidv4 } from 'uuid';
 import CarList from './CarList';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import CarInventory from '../employee/CarInventory'; 
 
 // Import and configure dynamic components
 const Map = dynamic(() => import('@/components/Map'), {
@@ -51,24 +52,40 @@ interface CarListProps {
   handleRentNow: (carId: string) => Promise<void>;
 }
 
+interface CarsLayoutProps {
+  // This prop will determine the fetch logic
+  isEmployeePage?: boolean; 
+}
+
 // Define the main CarsLayout component
-export const CarsLayout = () => {
-  // State declarations for managing cars, dates, and modal visibility
+export const CarsLayout: React.FC<CarsLayoutProps> = ({ isEmployeePage }) => {
   const [cars, setCars] = useState<Car[]>([]);
   const [pickupDate, setPickupDate] = useState<Date | null>(null);
   const [returnDate, setReturnDate] = useState<Date | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [mapShown, setMapShown] = useState(false);
-
-  // Fetch cars from the database where their status is not 'With Customer'
   useEffect(() => {
     async function fetchCars() {
-      const { data, error } = await supabase.from('cars').select('*').neq('Status', 'With Customer');
-      if (error) console.error('Error fetching cars:', error);
-      else setCars(data);
+      let query = supabase.from('cars').select('*');
+      if (!isEmployeePage) {
+        // Only fetch cars that are not with customers unless it's an employee page
+        query = query.neq('Status', 'With Customer'); 
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error('Error fetching cars:', error);
+        return; // Early return on error
+      }
+
+      if (data) {
+        setCars(data); // Safely update state when data is defined
+      }
     }
+
     fetchCars();
-  }, []);
+  }, [isEmployeePage]); // Re-fetch when isEmployeePage changes
 
   // Handle date changes by updating state
   const handleDateChange = (setter: React.Dispatch<React.SetStateAction<Date | null>>) => (date: DateValue | null) => {

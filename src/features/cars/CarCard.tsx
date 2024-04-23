@@ -25,14 +25,16 @@ interface Car {
 
 interface CarCardProps {
   car: Car;
-  pickupDate: Date | null;
-  returnDate: Date | null;
-  handleDateChange: (setter: React.Dispatch<React.SetStateAction<Date | null>>) => (date: DateValue) => void;
-  handleRentNow: (carId: string, pickupDate: Date, returnDate: Date) => void;
-  isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setPickupDate: React.Dispatch<React.SetStateAction<Date | null>>;
-  setReturnDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  pickupDate?: Date | null;
+  returnDate?: Date | null;
+  handleDateChange?: (setter: React.Dispatch<React.SetStateAction<Date | null>>) => (date: Date | null) => void;
+  handleRentNow?: (carId: string, pickupDate: Date, returnDate: Date) => void;
+  isModalOpen?: boolean;
+  setIsModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setPickupDate?: React.Dispatch<React.SetStateAction<Date | null>>;
+  setReturnDate?: React.Dispatch<React.SetStateAction<Date | null>>;
+  // New prop for employee pages
+  isEmployeePage?: boolean; 
 }
 
 // CarCard component definition using functional component syntax
@@ -40,6 +42,8 @@ const CarCard: React.FC<CarCardProps> = ({
   car,
   handleDateChange,
   handleRentNow,
+   // Default value for isEmployeePage prop
+  isEmployeePage = false,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pickupDate, setPickupDate] = useState<Date | null>(null); 
@@ -54,12 +58,11 @@ const CarCard: React.FC<CarCardProps> = ({
   // Handles the 'Rent Me' button click
   const handleRentNowClick = () => {
     if (pickupDate && returnDate) {
-      handleRentNow(car.id, pickupDate, returnDate);
+      handleRentNow && handleRentNow(car.id, pickupDate, returnDate);
     } else {
       alert('Please select both pickup and return dates.');
     }
   };
-
   return (
     <>
       <Card style={{opacity: hoverCard ? 0.7 : 1}} shadow="sm" p="lg" radius="md" withBorder 
@@ -110,9 +113,11 @@ const CarCard: React.FC<CarCardProps> = ({
             <Text size="sm">
               <strong>Location:</strong> {car.State}, {car.City}
             </Text>
-            <Text size="sm">
-              <strong>Status:</strong> {car.Status}
-            </Text>
+            {isEmployeePage ? (
+              <Text size="sm">
+                <strong>Status:</strong> {car.Status}
+              </Text>
+            ) : null}
             <Text size="sm">
               <strong>Mileage:</strong> {car.Mileage} Miles
             </Text>

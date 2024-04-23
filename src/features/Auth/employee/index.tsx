@@ -8,7 +8,7 @@ import {
 } from '@tabler/icons-react';
 
 import classes from './DoubleNavbar.module.css';
-
+import  BookingsList  from './BookingList';
 const data = [
   { link: '', label: 'Reservations', icon: IconCar },
   { link: '', label: 'Inventory', icon: IconListDetails },
@@ -24,6 +24,16 @@ export function NavbarSimple({onStateChange}:{
     onStateChange(active)
   }, [active])
 
+
+  const handleLinkClick = (label: string) => {
+     // Check which label is clicked
+    console.log('Link clicked:', label);
+    setActive(label);
+    // Call the passed `onStateChange` function with the label
+    onStateChange(label);
+  };
+
+
   const links = data.map((item) => (
     <a
       className={classes.link}
@@ -31,21 +41,23 @@ export function NavbarSimple({onStateChange}:{
       href={item.link}
       key={item.label}
       onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
+      event.preventDefault();
+      handleLinkClick(item.label);
+        
       }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
     </a>
   ));
-
+  
   return (
     <nav className={classes.navbar}>
         <h2>Employee page</h2>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
             <br/>
+            
         </Group>
         {links}
       </div>
