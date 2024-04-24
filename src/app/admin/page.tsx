@@ -1,40 +1,43 @@
+// AdminPage.tsx
 'use client'
-import { NavbarSimple } from '@/features/Auth/admin';
+import React, { useState } from 'react';
 import ManageEmployee from '@/features/admin/ManageEmployee';
-import CarInventory from '@/features/employee/CarInventory';
 import Reservations from '@/features/employee/Reservations';
-import React, { useState } from 'react'
+import { NavbarSimple } from '@/features/Auth/admin';
+import BookingsList from '../../features/Auth/employee/BookingList'; 
+import CarInventory from '../../features/Auth/employee/CarInventory'; 
 
-const adminPage = () => {   
-  const container = {
-    display: "flex",
-  }
+const AdminPage = () => {
+  const [activePage, setActivePage] = useState('');
 
-  const navbar = {
-    flex: 1,
-  }
+  const pageStyle = {
+    display: 'flex',
+    minHeight: '100vh', 
+  };
 
-  const inventory = {
-    marginRight: 25, 
-    marginBottom: 25,
-    marginLeft: 25,
-    width: "100%",
-  }
+  const navbarStyle = {
+    minWidth: '250px', // Minimum width of the navbar
+    flexShrink: 0, // Prevent the navbar from shrinking
+    height: '100%', // Make the navbar full height
+  };
 
-  const [currentPage, setCurrentPage] = useState('None');
-  
+  const contentStyle = {
+    flexGrow: 1, // Allow the content area to grow and fill the available space
+    padding: '20px', // Padding around the content
+  };
+
   return (
-    <div style={container}>
-      <div style={navbar}>
-        <NavbarSimple onStateChange={setCurrentPage}/>
+    <div style={pageStyle}>
+      <div style={navbarStyle}>
+        <NavbarSimple onStateChange={setActivePage} />
       </div>
-      <div style={inventory}>
-        {currentPage == "Manage Staff" && <ManageEmployee/>}
-        {currentPage == "Reservations" && <Reservations/>}
-        {currentPage == "Inventory" && <CarInventory/>}
-      </div>   
+      <div style={contentStyle}>
+        {activePage === 'Manage Staff' && <ManageEmployee />}
+        {activePage === 'Reservations' && <BookingsList />}
+        {activePage === 'Inventory' && <CarInventory />}
+      </div>
     </div>
-  )
-}
+  );
+};  
 
-export default adminPage;
+export default AdminPage;

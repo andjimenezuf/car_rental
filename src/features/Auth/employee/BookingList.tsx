@@ -71,7 +71,6 @@ const BookingsList: React.FC = () => {
 
     return (
         <div>
-            <h3>Bookings</h3>
             {bookings.map((booking, index) => (
                 <BookingCard key={index} booking={booking} />
             ))}
