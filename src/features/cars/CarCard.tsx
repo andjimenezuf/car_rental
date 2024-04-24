@@ -1,5 +1,5 @@
-// Import necessary libraries and components
-import React, { useState } from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Card, Divider, Flex, Image, Text, Title, Badge, Modal, Group } from '@mantine/core';
 import { IconArrowRight, IconWheel } from '@tabler/icons-react';
 import dayjs from 'dayjs';
@@ -8,6 +8,10 @@ import { DateValue } from '@mantine/dates';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Icon } from 'leaflet';
+import { useRouter } from 'next/navigation'; // Make sure to import useRouter
+import { supabaseClient } from '@/services/auth.service'; // Adjust the path as needed
+import { useUserSessionContext } from '@/context/UserSessionContext'; // Adjust the path as needed
+
 
 // Define TypeScript interfaces for props and car details
 interface Car {
@@ -37,38 +41,54 @@ interface CarCardProps {
   isEmployeePage?: boolean; 
 }
 
+
 // CarCard component definition using functional component syntax
 const CarCard: React.FC<CarCardProps> = ({
   car,
   handleDateChange,
   handleRentNow,
-   // Default value for isEmployeePage prop
   isEmployeePage = false,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pickupDate, setPickupDate] = useState<Date | null>(null); 
   const [returnDate, setReturnDate] = useState<Date | null>(null);
   const [hoverCard, setHoverCard] = useState(false);
+  const { user } = useUserSessionContext();
+  const router = useRouter();
 
-  // Handles card click to toggle modal visibility
+  // Handles card click to toggle modal visibility, requires user to be logged in
   const handleCardClick = () => {
-    setIsModalOpen(true);
-  };
-
-  // Handles the 'Rent Me' button click
-  const handleRentNowClick = () => {
-    if (pickupDate && returnDate) {
-      handleRentNow && handleRentNow(car.id, pickupDate, returnDate);
+    if (!user) {
+      alert('You need to be logged in to view the details and rent a car.');
+      router.push('/login');
     } else {
-      alert('Please select both pickup and return dates.');
+      setIsModalOpen(true);
     }
   };
+
+  // Handles the 'Rent Me' button click, requires dates and user to be logged in
+  const handleRentNowClick = () => {
+    if (!user) {
+      alert('You need to be logged in to rent a car.');
+      router.push('/login');
+      return; // Exit early if no user is logged in
+    }
+
+    if (!pickupDate || !returnDate) {
+      alert('Please select both pickup and return dates.');
+      return; // Ensure both dates are selected before proceeding
+    }
+
+    // Proceed with the rental process
+    handleRentNow(car.id, pickupDate, returnDate);
+  };
+
   return (
     <>
-      <Card style={{opacity: hoverCard ? 0.7 : 1}} shadow="sm" p="lg" radius="md" withBorder 
-      onClick={handleCardClick} 
-      onMouseEnter={() => setHoverCard(true)}
-      onMouseLeave={() => setHoverCard(false)}>
+      <Card style={{ opacity: hoverCard ? 0.7 : 1 }} shadow="sm" p="lg" radius="md" withBorder 
+        onClick={handleCardClick} 
+        onMouseEnter={() => setHoverCard(true)}
+        onMouseLeave={() => setHoverCard(false)}>
         <Flex direction="column">
           <Image
             src={car.Image}
@@ -92,11 +112,10 @@ const CarCard: React.FC<CarCardProps> = ({
       </Card>
       <Modal
         opened={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => setIsModalOpen(false)} 
         size="65rem"
         centered
-        withCloseButton={true}
-      >
+        withCloseButton={true}>
         <Flex direction={{ base: 'column', md: 'row' }} gap="md">
           <Image
             src={car.Image}
@@ -113,24 +132,24 @@ const CarCard: React.FC<CarCardProps> = ({
             <Text size="sm">
               <strong>Location:</strong> {car.State}, {car.City}
             </Text>
-            {isEmployeePage ? (
+            {isEmployeePage && (
               <Text size="sm">
                 <strong>Status:</strong> {car.Status}
               </Text>
-            ) : null}
+            )}
             <Text size="sm">
               <strong>Mileage:</strong> {car.Mileage} Miles
             </Text>
             <Text size="sm">
               <strong>Price:</strong> {car['Price Per Day']}/day
             </Text>
-            <div style={{display: 'flex', marginTop: 20}}>
+            <div style={{ display: 'flex', marginTop: 20 }}>
               <DatePicker
                 placeholderText='Start Date'
                 selected={pickupDate}
                 onChange={(date: Date | null) => setPickupDate(date)}
               />
-              <IconArrowRight style={{marginLeft: 10, marginRight: 10, marginTop: 3}}/>
+              <IconArrowRight style={{ marginLeft: 10, marginRight: 10, marginTop: 3 }}/>
               <DatePicker
                 placeholderText='End Date'
                 selected={returnDate}
@@ -147,5 +166,4 @@ const CarCard: React.FC<CarCardProps> = ({
   );
 };
 
-// Export the CarCard as the default component from this file
 export default CarCard;
