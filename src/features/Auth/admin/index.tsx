@@ -23,7 +23,17 @@ export function NavbarSimple({onStateChange}:{
 
   useEffect(() => {
     onStateChange(active)
-  })
+  }, [active])
+
+
+  const handleLinkClick = (label: string) => {
+     // Check which label is clicked
+    console.log('Link clicked:', label);
+    setActive(label);
+    // Call the passed `onStateChange` function with the label
+    onStateChange(label);
+  };
+
 
   const links = data.map((item) => (
     <a
@@ -32,26 +42,29 @@ export function NavbarSimple({onStateChange}:{
       href={item.link}
       key={item.label}
       onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
+      event.preventDefault();
+      handleLinkClick(item.label);
+      setActive(item.label);
+
       }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
     </a>
   ));
-
+  
   return (
     <nav className={classes.navbar}>
         <h2>Admin page</h2>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
             <br/>
+            
         </Group>
         {links}
       </div>
 
+
     </nav>
-   
   );
 }
