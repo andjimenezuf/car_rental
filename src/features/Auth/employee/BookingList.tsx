@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Card, Image, Text, Flex, Button, Group, Divider } from '@mantine/core';
+import { Card, Image, Text, Flex, Button, Group, Divider, Modal, TextInput } from '@mantine/core';
 import BookingCard from './BookingCard';
+import { primaryGradient } from '@/const';
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -35,6 +36,7 @@ interface Booking {
 
 const BookingsList: React.FC = () => {
     const [bookings, setBookings] = useState<Booking[]>([]);
+    const [reservationModal, setReservationModal] = useState(false);
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -71,9 +73,77 @@ const BookingsList: React.FC = () => {
 
     return (
         <div>
+            <div style={{display: "flex"}}>
+                <div style={{flex: 8}}>
+                    <h1>Reservations</h1>
+                </div>
+                <div style={{flex: 1, marginTop: 30}}>
+                    <Button variant='gradient' gradient={primaryGradient} onClick={() => setReservationModal(true)}>New Reservation</Button>
+                </div>
+            </div>
+            
             {bookings.map((booking, index) => (
                 <BookingCard key={index} booking={booking} />
             ))}
+
+            <Modal
+            opened={reservationModal}
+            onClose={() => setReservationModal(false)}
+            withCloseButton={false}
+            >
+                <h2>New Reservation</h2>
+
+                <TextInput
+                label="Car ID"
+                placeholder='000'
+                style={{marginBottom: 30}}
+                onChange={() => {
+                    
+                }}
+                />
+
+                <Flex>
+                <TextInput
+                    label="Pickup Date"
+                    placeholder='2024-04-24'
+                    style={{marginBottom: 30}}
+                />
+                <TextInput
+                    label="Return Date"
+                    placeholder='2024-04-26'
+                    style={{marginLeft: 10, marginBottom: 30}}
+                />
+                </Flex>
+
+                <TextInput
+                label="Total Price"
+                placeholder='300'
+                style={{marginBottom: 30}}
+                />
+
+                <TextInput
+                label="Status"
+                placeholder='Booked'
+                style={{marginBottom: 30}}
+                />
+
+                <TextInput
+                label="User ID"
+                placeholder='********'
+                style={{marginBottom: 30}}
+                />
+
+                <Button
+                style={{marginTop: 20}}
+                variant='gradient'
+                gradient={primaryGradient}
+                onClick={() => {
+                    setReservationModal(false)
+                }}
+                >
+                Add
+                </Button>
+            </Modal>
         </div>
     );
 };
