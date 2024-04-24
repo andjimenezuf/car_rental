@@ -39,7 +39,7 @@ const CarList: React.FC<CarListProps> = ({ cars, isEmployeePage }) => {
               {car['Model Year']} - {car.City}, {car.State}
             </Text>
 
-            <Badge color={car.Status === 'Available' ? 'green' : 'red'} variant="light" mt="md">
+            <Badge color={car.Status === 'At Rental Location' ? 'green' : (car.Status === 'Under Repair' ? 'orange' : 'red')} variant="light" mt="md">
               {car.Status}
             </Badge>
 
