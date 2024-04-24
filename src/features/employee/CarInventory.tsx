@@ -92,7 +92,7 @@ const CarInventory = () => {
         />
 
         <TextInput
-          label="Price/Day"
+          label="Price Per Day"
           placeholder='200'
           style={{marginBottom: 30}}
         />
@@ -116,7 +116,7 @@ const CarInventory = () => {
         />
 
         <TextInput
-          label="Price/Mile"
+          label="Price Per Mile"
           placeholder='5'
           style={{marginBottom: 30}}
         />

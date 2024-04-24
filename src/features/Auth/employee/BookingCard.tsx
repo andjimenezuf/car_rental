@@ -35,59 +35,60 @@ interface BookingCardProps {
 }
 
 
+
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
+  const startDate = dayjs(booking.pickupDate, 'YYYY-MM-DD');
+  const endDate = dayjs(booking.returnDate, 'YYYY-MM-DD');
 
-    
-const startDate = dayjs(booking.pickupDate, 'YYYY-MM-DD');
-const endDate = dayjs(booking.returnDate, 'YYYY-MM-DD');
-// Calculate the difference in days
-
- // Ensure dates are valid
- if (!startDate.isValid() || !endDate.isValid()) {
+  if (!startDate.isValid() || !endDate.isValid()) {
     console.error('Invalid date format', booking.pickupDate, booking.returnDate);
     return <Text>Invalid date format in booking data.</Text>;
   }
 
-const daysRented = endDate.diff(startDate, 'day');
-  const pricePerDay = parseFloat(booking.car['Price Per Day'].toString().replace(/[^0-9.-]+/g,""));
-  if (isNaN(pricePerDay)) {
-    console.error('Invalid price per day:', booking.car['Price Per Day']);
-    return <Text>Error calculating total price.</Text>;
+  const daysRented = endDate.diff(startDate, 'day');
+  let pricePerDay = 0;
+  let totalPrice = 0;
+
+  if (booking.car && booking.car['Price Per Day']) {
+    pricePerDay = parseFloat(booking.car['Price Per Day'].toString().replace(/[^0-9.-]+/g, ""));
+    if (!isNaN(pricePerDay)) {
+      totalPrice = (daysRented + 1) * pricePerDay;
+    } else {
+      console.error('Invalid price per day:', booking.car['Price Per Day']);
+      return <Text>Error calculating total price.</Text>;
+    }
   }
 
-  // Calculate the total price, +1 as the day itself counts
-  const totalPrice = (daysRented + 1) * pricePerDay;
-
-  console.log('Total Price:', totalPrice);
   return (
     <Card shadow="sm" p="md" radius="md" withBorder style={{ marginBottom: 20 }}>
       <Flex align="center">
-        <Image
-          src={booking.car.Image}
-          alt={booking.car.Model}
-          width={100}
-          height={100}
-          fit="cover"
-          style={{ marginRight: 20 }}
-        />
+        {booking.car && booking.car.Image && (
+          <Image src={booking.car.Image} alt={booking.car.Model} width={100} height={100} fit="cover" style={{ marginRight: 20 }} />
+        )}
         <Flex direction="column" style={{ flex: 1 }}>
-            <Text size="lg">{booking.car.Make} {booking.car.Model}</Text>
-            <Text color="dimmed" size="sm">
+          {booking.car ? (
+            <>
+              <Text size="lg">{booking.car.Make} {booking.car.Model}</Text>
+              <Text color="dimmed" size="sm">
                 {booking.car['Model Year']} - {booking.car.State}, {booking.car.City}
-            </Text>
-        </Flex>
+              </Text>
+            </>
+            ) : (
+              <></>
+            )}
+          </Flex>
       </Flex>
       <Divider my="sm" />
-    <Group style={{ marginTop: 10 }}>
+      <Group style={{ marginTop: 10 }}>
         <div>
-            <Text size="sm">Pickup: {booking.pickupDate}</Text>
-            <Text size="sm">Return: {booking.returnDate}</Text>
+          <Text size="sm">Pickup: {booking.pickupDate}</Text>
+          <Text size="sm">Return: {booking.returnDate}</Text>
         </div>
         <div>
-            <Text size="sm">Total Price: ${totalPrice.toFixed(2)}</Text>
-            <Text size="sm">Mileage: {booking.car.Mileage} miles</Text>
+          <Text size="sm">Total Price: ${totalPrice.toFixed(2)}</Text>
+          {booking.car && <Text size="sm">Mileage: {booking.car.Mileage} miles</Text>}
         </div>
-    </Group>
+      </Group>
     </Card>
   );
 };
