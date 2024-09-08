@@ -1,3 +1,21 @@
+# AutoCrase Rentals
+
+AutoCrase Rentals is a simulation of a car rental service built with Next.js, Mantine UI, and Supabase backed by PostgreSQL. It provides functionalities for user account creation with email verification, user authentication, dynamic display of car availability, rental costs, and car status.
+
+## Features
+
+- **User Authentication**: Secure authentication system with email verification using Supabase.
+- **Dynamic Car Display**: Real-time updates on car availability, rental costs, and status.
+- **Booking System**: Users can book cars through a user-friendly interface.
+- **Admin Panel**: Admins can manage employees, create new employee accounts, and book cars on behalf of clients.
+- **Employee Access**: Employees can also book cars for clients using the system.
+
+## Technologies Used
+
+- **Frontend**: Next.js, Mantine UI
+- **Backend**: Supabase, PostgreSQL
+- **Authentication**: Supabase Auth for secure authentication and authorization
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
